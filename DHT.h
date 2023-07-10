@@ -64,8 +64,8 @@ class DHT {
     uint8_t _pin, _type, _count;
     boolean read(void);
     unsigned long _lastreadtime;
-    boolean firstreading;
-
+    boolean firstreading;	
+	bool ready;
   public:
     DHT(uint8_t pin, uint8_t type, uint8_t count = COUNT);
     DHT(uint8_t type);
@@ -73,7 +73,8 @@ class DHT {
     float readTemperature(bool S = false);
     float convertCtoF(float);
     float readHumidity(void);
-
+	bool isReady();
+	
     /** Common  interface to get temp&humi value.support all DHT device.
 
         @return 0 for calibrated failed,1 for succeed.

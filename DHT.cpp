@@ -29,8 +29,7 @@ DHT::DHT(uint8_t type) {
     firstreading = true;
 }
 
-void DHT::begin(void) {
-
+void DHT::begin(void) {	
     if (_type == DHT10) {
         if (DHT10Init()) {
             SERIALPRINT.println("Error : Failed to init DHT 11\n");
@@ -42,7 +41,17 @@ void DHT::begin(void) {
         digitalWrite(_pin, HIGH);
         _lastreadtime = 0;
     }
+	
+	ready = false;
+	float dummyData[2];
+	if (readTempAndHumidity(dummyData) != -1 )
+		ready = true;
 
+}
+
+bool DHT::isReady()
+{
+	return ready; //TODO
 }
 
 /** Common  interface to get temp&humi value.support all DHT device.
